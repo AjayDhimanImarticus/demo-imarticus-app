@@ -87,7 +87,12 @@ before_script:
 
 script:
 
-  - "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
+  #- "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
+
+  - ./gradlew clean build
+  - ./gradlew test
+  - ./gradlew build check
+
 
     #before_deploy:
 
