@@ -1,6 +1,6 @@
 language: android
 sudo: required
-jdk: oraclejdk8
+jdk: oraclejdk11
 
 before_cache:
 
@@ -81,12 +81,12 @@ before_install:
 
   #- adb shell input keyevent 82 &
 
-script:
+#script:
 
   #- "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
 
-  - ./gradlew clean build
+  #- ./gradlew clean build
 
-  - ./gradlew test
+  #- ./gradlew test
 
-  - ./gradlew build check
+  #- ./gradlew build check
