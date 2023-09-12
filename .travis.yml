@@ -26,6 +26,8 @@ env:
 
     - ANDROID_BUILD_TOOLS=30.0.2
 
+    - ANDROID_ABI=armeabi-v7a
+
     - ADB_INSTALL_TIMEOUT=5 # minutes
 
 android:
@@ -74,8 +76,6 @@ before_install:
   - ./gradlew dependencies || true
 
 before_script:
-
-  - sys-img-armeabi-v7a-android-25
 
   - echo no | android create avd --force -n test -t android-25 --abi armeabi-v7a
 
