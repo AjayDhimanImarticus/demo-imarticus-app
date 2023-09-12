@@ -26,8 +26,6 @@ env:
 
     - ANDROID_BUILD_TOOLS=30.0.2
 
-    - ANDROID_ABI=armeabi-v7a
-
     - ADB_INSTALL_TIMEOUT=5 # minutes
 
 android:
@@ -39,6 +37,8 @@ android:
     - platform-tools
 
     - build-tools-$ANDROID_BUILD_TOOLS
+
+    - ANDROID_ABI=armeabi-v7a
 
     - android-$ANDROID_API
 
