@@ -22,7 +22,7 @@ env:
 
     - ANDROID_API=33
 
-    - EMULATOR_API=21
+    - EMULATOR_API=33
 
     - ANDROID_BUILD_TOOLS=30.0.2
 
