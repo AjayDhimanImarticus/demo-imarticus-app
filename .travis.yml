@@ -84,10 +84,10 @@ before_install:
 
 script:
 
-  - "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
+  - bash gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
 
-  - ./gradlew clean build
+  - bash gradlew clean build
 
-  - ./gradlew test
+  - bash gradlew test
 
-  - ./gradlew build check
+  - bash gradlew build check
