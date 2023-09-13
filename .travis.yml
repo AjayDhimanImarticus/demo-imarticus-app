@@ -84,7 +84,7 @@ before_install:
 
 script:
 
-  - bash gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
+  - bash gradlew clean build connectedCheck -PdisablePreDex --stacktrace
 
   - bash gradlew clean build
 
