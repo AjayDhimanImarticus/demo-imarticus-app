@@ -87,4 +87,4 @@ script:
 
   - bash gradlew test
 
-  - bash gradlew build check
+  - bash gradlew build
