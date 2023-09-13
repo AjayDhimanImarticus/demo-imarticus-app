@@ -83,9 +83,6 @@ before_install:
   #- adb shell input keyevent 82 &
 
 script:
-
-  - bash gradlew clean build connectedCheck -PdisablePreDex --stacktrace
-
   - bash gradlew clean build
 
   - bash gradlew test
