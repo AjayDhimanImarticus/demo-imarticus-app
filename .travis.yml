@@ -83,8 +83,15 @@ before_install:
   #- adb shell input keyevent 82 &
 
 script:
-  - bash gradlew clean build
+  - ./gradlew clean build
 
-  - bash gradlew test
+  - ./bash gradlew test
 
-  - bash gradlew build
+  - ./bash gradlew build
+
+
+  #- bash gradlew clean build
+
+  #- bash gradlew test
+
+  #- bash gradlew build
