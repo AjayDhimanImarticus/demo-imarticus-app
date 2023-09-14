@@ -74,6 +74,8 @@ before_install:
   - ./gradlew dependencies || true
 
 before_script:
+  - android list targets
+
   - echo no | android create avd --force -n test -t $ANDROID_API --abi armeabi-v7a
 
   - emulator -avd test -no-skin -no-audio -no-window &
