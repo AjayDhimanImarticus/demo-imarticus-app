@@ -76,7 +76,7 @@ before_install:
   - ./gradlew dependencies || true
 
 before_script:
-  - echo no | android create avd -n test -t android-22 --   abi armeabi-v7a
+  - echo no | android create avd -n test -t android-22 --abi armeabi-v7a
 
   - emulator -avd test -no-skin -no-audio -no-window &
 
@@ -90,10 +90,3 @@ script:
   - ./bash gradlew test
 
   - ./bash gradlew build
-
-
-  #- bash gradlew clean build
-
-  #- bash gradlew test
-
-  #- bash gradlew build
