@@ -72,6 +72,7 @@ before_install:
 
   - ./gradlew dependencies || true
 
+
 before_script:
 
   - echo no | android create avd --force -n test -t android-25 --abi arm64-v8a
