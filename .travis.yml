@@ -89,6 +89,6 @@ before_script:
 script:
   - ./gradlew clean build
 
-  - ./bash gradlew test
+  - ./gradlew test
 
-  - ./bash gradlew build
+  - ./gradlew build
