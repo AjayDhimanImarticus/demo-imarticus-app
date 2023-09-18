@@ -63,7 +63,6 @@ android:
     - '.+'
 
 before_install:
-  - pwd
 #  - touch $HOME/.android/repositories.cfg
     # Android API Level 30
   - yes | sdkmanager "platforms;android-30"
