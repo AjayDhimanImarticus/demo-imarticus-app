@@ -24,7 +24,7 @@ env:
 
     - EMULATOR_API=33
 
-    - ANDROID_BUILD_TOOLS=30.0.2
+    - ANDROID_BUILD_TOOLS=33.0.2
 
     - ADB_INSTALL_TIMEOUT=5 # minutes
 
@@ -63,7 +63,18 @@ android:
     - '.+'
 
 before_install:
-
+  - pwd
+#  - touch $HOME/.android/repositories.cfg
+#    # Android API Level 30
+#    - yes | sdkmanager "platforms;android-30"
+#    - yes | sdkmanager "build-tools;30.0.2"
+#    # Android API Level 31
+#    - yes | sdkmanager "platforms;android-31"
+#    - yes | sdkmanager "build-tools;31.0.0"
+#    # Android API Level 32
+#    - yes | sdkmanager "platforms;android-32"
+#    - yes | sdkmanager "build-tools;32.0.0"
+  - echo $ANDROID_HOME
   - mkdir "$ANDROID_HOME/licenses" || true
 
   - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
