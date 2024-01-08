@@ -70,9 +70,9 @@ before_install:
 
   - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
   - ls /usr/local/
-  - sdkmanager --version
+#  - sdkmanager --version
     #    # Android API Level 33
-  - yes | sdkmanager "platforms;android-25"
+  - sudo sdkmanager "platforms;android-25"
   - yes | sdkmanager "build-tools;25.2.0"
 #  - yes | sdkmanager --sdk_root=$ANDROID_HOME "platform-tools" "platforms;android-33" "build-tools;33.0.2" "system-images;android-33;google_apis;x86_64"
   - chmod +x gradlew
