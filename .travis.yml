@@ -7,7 +7,7 @@ env:
  global:
   - ANDROID_HOME=$HOME/travis-tools/android
   - ANDROID_SDK_ROOT=$HOME/travis-tools/android
-
+  - JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/bin
 before_install:
  # PREPARE FOR ANDROID SDK SETUP
  - rm -rf $HOME/.android
