@@ -71,7 +71,7 @@ before_install:
 
   - sudo apt list | grep android
 
-  - export PATH=$ANDROID_HOME/cmdline-tools/latest/bin
+  - export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 
   - mkdir "$ANDROID_HOME/licenses" || true
 
