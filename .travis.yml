@@ -65,9 +65,9 @@ android:
 before_install:
   - echo $ANDROID_HOME
 
-  - echo java --version
+  - java --version
 
-  - echo javac --version
+  - javac --version
 
   - sudo apt list | grep android
 
