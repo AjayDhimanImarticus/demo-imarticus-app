@@ -10,7 +10,7 @@ env:
 
 before_install:
  # PREPARE FOR ANDROID SDK SETUP
- - rm -rf $HOME/travis-tools/android
+ - rm -rf $HOME/.android
  - mkdir -p $HOME/travis-tools/android && mkdir $HOME/.android && touch $HOME/.android/repositories.cfg
  - cd $ANDROID_HOME && wget -q "https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip" -O commandlinetools.zip
  - unzip -q commandlinetools.zip && cd cmdline-tools
