@@ -1,3 +1,4 @@
+dist: jammy
 language: android
 sudo: required
 jdk: oraclejdk11
