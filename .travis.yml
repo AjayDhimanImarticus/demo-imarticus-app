@@ -21,6 +21,8 @@ android:
  - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
 
 before_install:
+-  printenv | grep JAVA_HOME
+-  which java
 - chmod +x gradlew
 - ./gradlew dependencies || true # DON'T ADD unless you are getting "Install missing components using SDK manager"
 #Source: https://medium.com/@oldergod/constraint-layout-and-circleci-travis-d50342696d2
