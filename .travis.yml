@@ -1,40 +1,51 @@
 language: android
-dist: trusty
 sudo: required
-jdk: oraclejdk11
+jdk: oraclejdk8
+
+before_cache:
+ - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+ - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+ directories:
+ - $HOME/.gradle/caches/
+ - $HOME/.gradle/wrapper/
 
 env:
  global:
-  - ANDROID_HOME=$HOME/travis-tools/android
-  - ANDROID_SDK_ROOT=$HOME/travis-tools/android
-  - JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+ - ANDROID_API=22
+ - ANDROID_BUILD_TOOLS=22.0.2
+
+android:
+ components:
+ - tools
+ - platform-tools
+ - build-tools-$ANDROID_BUILD_TOOLS
+ - android-$ANDROID_API
+ - extra-google-m2repository
+ - extra-android-m2repository # for design library
+ - addon-google_apis-google-19 # google play services
+ - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
+ - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
+
+ licenses:
+ - android-sdk-preview-license-.+
+ - android-sdk-license-.+
+ - google-gdk-license-.+
 
 before_install:
- # PREPARE FOR ANDROID SDK SETUP
- - rm -rf $HOME/.android
- - mkdir -p $HOME/travis-tools/android && mkdir $HOME/.android && touch $HOME/.android/repositories.cfg
- - cd $ANDROID_HOME && wget -q "https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip" -O commandlinetools.zip
- - unzip -q commandlinetools.zip && cd cmdline-tools
- - mv * tools | mkdir tools && cd $TRAVIS_BUILD_DIR
- 
- # SETUP PATH(s)
- - export PATH=$ANDROID_HOME/cmdline-tools/tools/bin/:$PATH
- - export PATH=$ANDROID_HOME/emulator/:$PATH
- - export PATH=$ANDROID_HOME/platform-tools/:$PATH
- - printenv
+- mkdir "$ANDROID_HOME/licenses" || true
+- echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
+- echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
+- chmod +x gradlew
+- ./gradlew dependencies || true # DON'T ADD unless you are getting "Install missing components using SDK manager"
+#Source: https://medium.com/@oldergod/constraint-layout-and-circleci-travis-d50342696d2
 
-install:
- - which javac
- - which java
- - echo $JAVA_HOME
-
- # INSTALL REQUIRED ANDROID SDK TOOLS
- - sdkmanager --sdk_root=$ANDROID_HOME --list | awk '/Installed/{flag=1; next} /Available/{flag=0} flag'
- - yes | sdkmanager --sdk_root=$ANDROID_HOME "platform-tools" "platforms;android-25" "build-tools;25.0.2"
- - sdkmanager --list --sdk_root=$ANDROID_HOME | awk '/Installed/{flag=1; next} /Available/{flag=0} flag'
+# before_script:
+# - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
 
 script:
- # - sdkmanager --list --sdk_root=$ANDROID_HOME | awk '/Installed/{flag=1; next} /Available/{flag=0} flag'
- - gradlew clean build
- - gradlew test
- - gradlew build
+- "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
+- gradlew clean build
+- gradlew test
+- gradlew build

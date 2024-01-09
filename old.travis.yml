@@ -64,7 +64,9 @@ android:
 
 before_install:
   - echo $ANDROID_HOME
-
+  - which javac
+  - which java
+  - echo $JAVA_HOME
   - java --version
 
   - javac --version

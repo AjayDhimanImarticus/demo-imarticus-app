@@ -1,0 +1,40 @@
+language: android
+dist: trusty
+sudo: required
+jdk: oraclejdk11
+
+env:
+ global:
+  - ANDROID_HOME=$HOME/travis-tools/android
+  - ANDROID_SDK_ROOT=$HOME/travis-tools/android
+  - JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+
+before_install:
+ # PREPARE FOR ANDROID SDK SETUP
+ - rm -rf $HOME/.android
+ - mkdir -p $HOME/travis-tools/android && mkdir $HOME/.android && touch $HOME/.android/repositories.cfg
+ - cd $ANDROID_HOME && wget -q "https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip" -O commandlinetools.zip
+ - unzip -q commandlinetools.zip && cd cmdline-tools
+ - mv * tools | mkdir tools && cd $TRAVIS_BUILD_DIR
+ 
+ # SETUP PATH(s)
+ - export PATH=$ANDROID_HOME/cmdline-tools/tools/bin/:$PATH
+ - export PATH=$ANDROID_HOME/emulator/:$PATH
+ - export PATH=$ANDROID_HOME/platform-tools/:$PATH
+ - printenv
+
+install:
+ - which javac
+ - which java
+ - echo $JAVA_HOME
+
+ # INSTALL REQUIRED ANDROID SDK TOOLS
+ - sdkmanager --sdk_root=$ANDROID_HOME --list | awk '/Installed/{flag=1; next} /Available/{flag=0} flag'
+ - yes | sdkmanager --sdk_root=$ANDROID_HOME "platform-tools" "platforms;android-25" "build-tools;25.0.2"
+ - sdkmanager --list --sdk_root=$ANDROID_HOME | awk '/Installed/{flag=1; next} /Available/{flag=0} flag'
+
+script:
+ # - sdkmanager --list --sdk_root=$ANDROID_HOME | awk '/Installed/{flag=1; next} /Available/{flag=0} flag'
+ - gradlew clean build
+ - gradlew test
+ - gradlew build
