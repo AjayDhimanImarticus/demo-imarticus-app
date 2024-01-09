@@ -8,6 +8,7 @@ env:
   - ANDROID_HOME=$HOME/travis-tools/android
   - ANDROID_SDK_ROOT=$HOME/travis-tools/android
   - JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+
 before_install:
  # PREPARE FOR ANDROID SDK SETUP
  - rm -rf $HOME/.android
@@ -29,19 +30,11 @@ install:
 
  # INSTALL REQUIRED ANDROID SDK TOOLS
  - sdkmanager --sdk_root=$ANDROID_HOME --list | awk '/Installed/{flag=1; next} /Available/{flag=0} flag'
- - yes | sdkmanager --sdk_root=$ANDROID_HOME "platform-tools" "platforms;android-33" "build-tools;33.0.2"
+ - yes | sdkmanager --sdk_root=$ANDROID_HOME "platform-tools" "platforms;android-25" "build-tools;25.0.2"
  - sdkmanager --list --sdk_root=$ANDROID_HOME | awk '/Installed/{flag=1; next} /Available/{flag=0} flag'
- # CREATE AVD
- - echo "no" | avdmanager --verbose create avd --force --name "my_android_33" --package "system-images;android-33;google_apis;x86_64" --tag "google_apis" --abi "x86_64"
- - sudo chmod -R 777 /dev/kvm
- # Start emulator in background and wait for it to start
- - adb kill-server && adb start-server &
- - sleep 15 # sleep values may require adjusting depending on the specific build environment
- - emulator @my_android_33 -no-audio -no-window &
- - sleep 60
 
 script:
- - sdkmanager --list --sdk_root=$ANDROID_HOME | awk '/Installed/{flag=1; next} /Available/{flag=0} flag'
+ # - sdkmanager --list --sdk_root=$ANDROID_HOME | awk '/Installed/{flag=1; next} /Available/{flag=0} flag'
  - gradlew clean build
  - gradlew test
  - gradlew build
