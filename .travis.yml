@@ -13,6 +13,7 @@ android:
     - extra-android-m2repository
 
 scripts:
+    - lscpu
     - gradlew clean build
     - gradlew test
     - gradlew build
