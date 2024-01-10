@@ -1,19 +1,15 @@
 language: android
 jdk: oraclejdk8
-sudo: false
 
 android:
   components:
     - platform-tools
     - tools
-    - build-tools-24.0.2
-    - android-22
-    - android-24
-    - sys-img-armeabi-v7a-android-22
+    - build-tools-30.0.3
+    - android-30
+    - extra-google-google_play_services
+    - extra-google-m2repository
     - extra-android-m2repository
 
-scripts:
-    - lscpu
-    - gradlew clean build
-    - gradlew test
-    - gradlew build
+before_install:
+  - yes | sdkmanager "platforms;android-30"
