@@ -1,5 +1,5 @@
 language: android
-jdk: openjdk11
+jdk: oraclejdk8
 
 android:
   components:
@@ -12,7 +12,6 @@ android:
     - extra-android-m2repository
 
 before_install:
-  - yes | sdkmanager "platforms;android-30"
   - chmod +x gradlew
 
 script:
