@@ -1,37 +1,18 @@
-dist: trusty
 language: android
-sudo: required
-jdk: oraclejdk11
-
-env:
- global:
- - ANDROID_API=33
- - ANDROID_BUILD_TOOLS=33.0.2
+jdk: oraclejdk8
+sudo: false
 
 android:
- components:
- - tools
- - platform-tools
- - build-tools-$ANDROID_BUILD_TOOLS
- - android-$ANDROID_API
- - extra-google-m2repository
- - extra-android-m2repository # for design library
- - addon-google_apis-google-19 # google play services
- - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
- - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
+  components:
+    - platform-tools
+    - tools
+    - build-tools-24.0.2
+    - android-22
+    - android-24
+    - sys-img-armeabi-v7a-android-22
+    - extra-android-m2repository
 
-before_install:
--  printenv | grep JAVA_HOME
--  which java
-- chmod +x gradlew
-- ./gradlew dependencies || true # DON'T ADD unless you are getting "Install missing components using SDK manager"
-#Source: https://medium.com/@oldergod/constraint-layout-and-circleci-travis-d50342696d2
-
-# before_script:
-# - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
-
-script:
-- "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
-- gradlew clean build
-- gradlew test
-- gradlew build
+scripts:
+    - gradlew clean build
+    - gradlew test
+    - gradlew build
