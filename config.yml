@@ -29,5 +29,4 @@ jobs:
           path: app/build/outputs/apk/
           destination: apks/
       # run tests
-      - run: ./gradlew test
       - run: ./gradlew build
